@@ -2,7 +2,7 @@
      to eliminate "the" from index and query.
  -->
 <fieldType name="keywords" class="solr.TextField" positionIncrementGap="100">
-      <analyzer type="index">
+      <analyzer>
         <!-- KeywordTokenizer does no actual tokenizing, so the entire
              input string is preserved as a single token
           -->
@@ -23,7 +23,7 @@
              http://docs.oracle.com/javase/7/docs/api/java/util/regex/package-summary.html
              http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html#sum
           -->           
-        <!-- erase "the" from index --> 
+        <!-- erase "the" from any phrase --> 
         <filter class="solr.PatternReplaceFilterFactory"
                 pattern=" the " replacement=" " replace="all"/>
         <filter class="solr.PatternReplaceFilterFactory"
@@ -31,16 +31,4 @@
         <filter class="solr.PatternReplaceFilterFactory"
                 pattern=" the$" replacement="" replace="all"/>                
       </analyzer>
-      <analyzer type="query">
-        <tokenizer class="solr.KeywordTokenizerFactory"/>
-        <filter class="solr.LowerCaseFilterFactory"/>
-        
-        <!-- erase  "the" from query -->
-        <filter class="solr.PatternReplaceFilterFactory"
-                pattern=" the\ " replacement=" " replace="all"/>
-        <filter class="solr.PatternReplaceFilterFactory"
-                pattern="^the\ " replacement="" replace="all"/>
-        <filter class="solr.PatternReplaceFilterFactory"
-                pattern="\ the$" replacement="" replace="all"/>         
-      </analyzer> 
 	</fieldType>
