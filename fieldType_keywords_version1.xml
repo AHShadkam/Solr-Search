@@ -1,0 +1,46 @@
+<!-- Replace this fieldType with the keywords fieldType in schema
+     to eliminate "the" from index and query.
+ -->
+<fieldType name="keywords" class="solr.TextField" positionIncrementGap="100">
+      <analyzer type="index">
+        <!-- KeywordTokenizer does no actual tokenizing, so the entire
+             input string is preserved as a single token
+          -->
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <!-- The LowerCase TokenFilter does what you expect, which can be
+             when you want your sorting to be case insensitive
+          -->
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <!-- The PatternReplaceFilter gives you the flexibility to use
+             Java Regular expression to replace any sequence of characters
+             matching a pattern with an arbitrary replacement string, 
+             which may include back references to portions of the original
+             string matched by the pattern.
+             
+             See the Java Regular Expression documentation for more
+             information on pattern and replacement string syntax.
+             
+             http://docs.oracle.com/javase/7/docs/api/java/util/regex/package-summary.html
+             http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html#sum
+          -->           
+        <!-- erase "the" from index --> 
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern=" the " replacement=" " replace="all"/>
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern="^the " replacement="" replace="all"/> 
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern=" the$" replacement="" replace="all"/>                
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        
+        <!-- erase  "the" from query -->
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern=" the\ " replacement=" " replace="all"/>
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern="^the\ " replacement="" replace="all"/>
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern="\ the$" replacement="" replace="all"/>         
+      </analyzer> 
+	</fieldType>
