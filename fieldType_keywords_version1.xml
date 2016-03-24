@@ -30,21 +30,18 @@
         <filter class="solr.PatternReplaceFilterFactory"
                 pattern="^the\s|\sthe$" replacement="" replace="all"/> 
  
-                
         <!-- erase "a" from any phrase --> 
         <filter class="solr.PatternReplaceFilterFactory"
                 pattern=" a " replacement=" " replace="all"/>
         <filter class="solr.PatternReplaceFilterFactory"
                 pattern="^a\s|\sa$" replacement="" replace="all"/> 
 
-                
         <!-- erase "an" from any phrase --> 
         <filter class="solr.PatternReplaceFilterFactory"
                 pattern=" an " replacement=" " replace="all"/>
         <filter class="solr.PatternReplaceFilterFactory"
                 pattern="^an\s|\san$" replacement="" replace="all"/> 
 
-                
         <!-- erase "to" from any phrase --> 
         <filter class="solr.PatternReplaceFilterFactory"
                 pattern=" to " replacement=" " replace="all"/>
@@ -69,7 +66,6 @@
         <filter class="solr.PatternReplaceFilterFactory"
                 pattern="^is\s|\sis$" replacement="" replace="all"/> 
 
-                
        <!-- erase "and" from any phrase --> 
         <filter class="solr.PatternReplaceFilterFactory"
                 pattern=" and " replacement=" " replace="all"/>
