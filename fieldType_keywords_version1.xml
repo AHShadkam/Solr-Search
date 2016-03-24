@@ -1,5 +1,6 @@
 <!-- Replace this fieldType with the keywords fieldType in schema
-     to eliminate "the" from index and query.
+     to eliminate a list of words from index and query.
+     list={the,a,an,to,of,it,is,and,or}
  -->
 <fieldType name="keywords" class="solr.TextField" positionIncrementGap="100">
       <analyzer>
@@ -25,10 +26,56 @@
           -->           
         <!-- erase "the" from any phrase --> 
         <filter class="solr.PatternReplaceFilterFactory"
-                pattern=" the " replacement=" " replace="all"/>
+                pattern="\sthe\s" replacement=" " replace="all"/>
         <filter class="solr.PatternReplaceFilterFactory"
-                pattern="^the " replacement="" replace="all"/> 
+                pattern="^the\s|\sthe$" replacement="" replace="all"/> 
+ 
+                
+        <!-- erase "a" from any phrase --> 
         <filter class="solr.PatternReplaceFilterFactory"
-                pattern=" the$" replacement="" replace="all"/>                
+                pattern="\sa\s" replacement=" " replace="all"/>
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern="^a\s|\sa$" replacement="" replace="all"/> 
+
+                
+        <!-- erase "an" from any phrase --> 
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern="\san\s" replacement=" " replace="all"/>
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern="^an\s|\san$" replacement="" replace="all"/> 
+
+                
+        <!-- erase "to" from any phrase --> 
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern=" to " replacement=" " replace="all"/>
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern="^to\s|\sto$" replacement="" replace="all"/> 
+                
+        <!-- erase "of" from any phrase --> 
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern=" of " replacement=" " replace="all"/>
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern="^of\s|\sof$" replacement="" replace="all"/>       
+                
+        <!-- erase "it" from any phrase --> 
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern=" it " replacement=" " replace="all"/>
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern="^it\s|\sit$" replacement="" replace="all"/>                                                        
+      
+       <!-- erase "is" from any phrase --> 
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern=" is " replacement=" " replace="all"/>
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern="^is\s|\sis$" replacement="" replace="all"/> 
+
+                
+       <!-- erase "and" from any phrase --> 
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern=" and " replacement=" " replace="all"/>
+       
+       <!-- erase "or" from any phrase --> 
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern=" or " replacement=" " replace="all"/>        
       </analyzer>
 	</fieldType>
