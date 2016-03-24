@@ -78,4 +78,4 @@
         <filter class="solr.PatternReplaceFilterFactory"
                 pattern=" or " replacement=" " replace="all"/>        
       </analyzer>
-	</fieldType>
+</fieldType>
