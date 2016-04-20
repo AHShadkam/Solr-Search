@@ -1,7 +1,3 @@
-<!-- Replace this fieldType with the keywords fieldType in schema
-     to eliminate a list of words from index and query.
-     list={the,a,an,to,of,it,is,and,or}
- -->
 <fieldType name="keywords" class="solr.TextField" positionIncrementGap="100">
       <analyzer>
         <!-- KeywordTokenizer does no actual tokenizing, so the entire
@@ -11,67 +7,43 @@
         <!-- The LowerCase TokenFilter does what you expect, which can be
              when you want your sorting to be case insensitive
           -->
-        <filter class="solr.LowerCaseFilterFactory"/>
-        <!-- The PatternReplaceFilter gives you the flexibility to use
-             Java Regular expression to replace any sequence of characters
-             matching a pattern with an arbitrary replacement string, 
-             which may include back references to portions of the original
-             string matched by the pattern.
-             
-             See the Java Regular Expression documentation for more
-             information on pattern and replacement string syntax.
-             
-             http://docs.oracle.com/javase/7/docs/api/java/util/regex/package-summary.html
-             http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html#sum
-          -->           
-        <!-- erase "the" from any phrase --> 
+        <filter class="solr.LowerCaseFilterFactory"/> 
+
+        <!-- remove "the" from start, middle of the phrase -->
         <filter class="solr.PatternReplaceFilterFactory"
                 pattern=" the " replacement=" " replace="all"/>
         <filter class="solr.PatternReplaceFilterFactory"
-                pattern="^the\s|\sthe$" replacement="" replace="all"/> 
- 
-        <!-- erase "a" from any phrase --> 
-        <filter class="solr.PatternReplaceFilterFactory"
-                pattern=" a " replacement=" " replace="all"/>
-        <filter class="solr.PatternReplaceFilterFactory"
-                pattern="^a\s|\sa$" replacement="" replace="all"/> 
-
-        <!-- erase "an" from any phrase --> 
-        <filter class="solr.PatternReplaceFilterFactory"
-                pattern=" an " replacement=" " replace="all"/>
-        <filter class="solr.PatternReplaceFilterFactory"
-                pattern="^an\s|\san$" replacement="" replace="all"/> 
-
-        <!-- erase "to" from any phrase --> 
-        <filter class="solr.PatternReplaceFilterFactory"
-                pattern=" to " replacement=" " replace="all"/>
-        <filter class="solr.PatternReplaceFilterFactory"
-                pattern="^to\s|\sto$" replacement="" replace="all"/> 
-                
-        <!-- erase "of" from any phrase --> 
-        <filter class="solr.PatternReplaceFilterFactory"
-                pattern=" of " replacement=" " replace="all"/>
-        <filter class="solr.PatternReplaceFilterFactory"
-                pattern="^of\s|\sof$" replacement="" replace="all"/>       
-                
-        <!-- erase "it" from any phrase --> 
-        <filter class="solr.PatternReplaceFilterFactory"
-                pattern=" it " replacement=" " replace="all"/>
-        <filter class="solr.PatternReplaceFilterFactory"
-                pattern="^it\s|\sit$" replacement="" replace="all"/>                                                        
-      
-       <!-- erase "is" from any phrase --> 
+                pattern="^the " replacement="" replace="all"/>	
+        <!-- remove "is" from start, middle of the phrase -->        
         <filter class="solr.PatternReplaceFilterFactory"
                 pattern=" is " replacement=" " replace="all"/>
         <filter class="solr.PatternReplaceFilterFactory"
-                pattern="^is\s|\sis$" replacement="" replace="all"/> 
-
-       <!-- erase "and" from any phrase --> 
+                pattern="^is " replacement="" replace="all"/> 
+        <!-- remove "a" from start, middle of the phrase -->       
         <filter class="solr.PatternReplaceFilterFactory"
-                pattern=" and " replacement=" " replace="all"/>
-       
-       <!-- erase "or" from any phrase --> 
+                pattern=" a " replacement=" " replace="all"/>
         <filter class="solr.PatternReplaceFilterFactory"
-                pattern=" or " replacement=" " replace="all"/>        
+                pattern="^a " replacement="" replace="all"/>              	
+       <!--                    -->                
+       <!-- Word Replacements  -->
+       <!--                    -->
+       <filter class="solr.PatternReplaceFilterFactory"
+                pattern="stops|stopped|stopping|stoped|stoping" replacement="stop" replace="all"/>
+                
+       <filter class="solr.PatternReplaceFilterFactory"
+                pattern="starts|starting" replacement="start" replace="all"/>   
+                
+       <filter class="solr.PatternReplaceFilterFactory"
+                pattern="noisey" replacement="noisy" replace="all"/>
+                
+       <filter class="solr.PatternReplaceFilterFactory"
+                pattern="noises" replacement="noise" replace="all"/>                      
+                 
+       <filter class="solr.PatternReplaceFilterFactory"
+                pattern="squeeking|squealing|screeching" replacement="squeaking" replace="all"/>  
+                  
+       <filter class="solr.PatternReplaceFilterFactory"
+                pattern="leaks|leaking|leeking" replacement="leak" replace="all"/>
+                                                            
       </analyzer>
 </fieldType>
