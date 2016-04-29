@@ -12,3 +12,8 @@ All|Term|stopping|stop,stops,stoping|||added
 Domain|Type|Primary Phrase|Symptoms|Normalized Symptom|Cases|Status
 ------|----|--------------|--------|------------------|-----|------
 Dryer|Symptoms|vent cleaning|not venting|||added
+Dryer|Symptoms|not starting|not turning on|||added
+Refrigeration|Symptoms|no power|not turning on|||added
+Washer|Symptoms|no power|not turning on|||added
+Dryer|Symptoms|not heating|not heat|||added
+Refrigeration|Symptoms|not running|not freezing|||added
