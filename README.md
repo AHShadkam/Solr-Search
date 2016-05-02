@@ -2,10 +2,5 @@
 * stopwords:
   + the
   + a
-  + an
-  + to
-  + of
-  + it
   + is
-  + and
-  + or
+
